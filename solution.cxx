@@ -29,10 +29,19 @@ using namespace std;
 
 
 int main(){
+        // X, Y are the partite sets of bigraph G
+        // U is the set of vertices in X unsaturated by the matching
         vector<int> X, Y, U;
+        // the edges (x, y) of G, where x is in X
         vector<pair<int, int>> edges;
+        // a matching M mapping a vertex in X to a vertex in Y
+        // Mi is the inverse of M, mapping a vertex in Y to a vertex in X
         unordered_map<int, int> M, Mi;
+        // idX and idY map the string representation of vertices in X and Y respectively
+        // to an integer from 0 to |X| and 0 to |Y| respectively
         unordered_map<string, int> idX, idY;
+        // idYi and idXi is the inverse of idX and idY. These are only used for displaying
+        // the output properly.
         unordered_map<int, string> idYi, idXi;
 
         string line;
