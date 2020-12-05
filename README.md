@@ -20,7 +20,7 @@ Use ```./run.sh <input_file>``` where ```<input_file>``` has the structure descr
 To produce a matching without visuals, compile ```matchings.cxx``` and run with an input file redirected into the executable.
 
 ### run.sh
-Runs ```matchings.cxx``` executable with the given argument, then runs ```visualize.py``` to produce the image.
+Runs ```matchings.cxx``` executable with the given argument, then runs ```visualize.py``` to produce the image (visuals do not work very well for disconnected graphs).
 
 ### algo_3.2.1.cxx
 Implements Algorithm 3.2.1 from the textbook.
