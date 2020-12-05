@@ -4,7 +4,7 @@
 ## Requirements
 Running ```matchings.cxx``` requires C++11.
 
-Run pip3 install -r requirements.txt to install ```visualize.py``` requirements.
+Run ```pip3 install -r requirements.txt``` to install ```visualize.py``` requirements.
 
 ## Usage
 ### Input Graph File
