@@ -30,3 +30,6 @@ Uses Algorithm 3.2.1 to find M-augmenting paths in a biparite graph, starting wi
 
 ### visualize.py
 Reads graph edges and nodes from ```graph_data.txt``` and matching edges from ```matching.txt```. It then displays the graph with the edges in the matching colored in red, and nodes belonging to different partite sets colored differently.
+
+### knm.cxx
+Produces an input file for the complete bipartite graph with partite sets of size n and m
