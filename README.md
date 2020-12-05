@@ -1,2 +1,2 @@
-# Intro to Graph Theory
-## M-Augmenting Path Finder
+# Intro to Graph Theory: Final Project
+## Find a maximum matching in a bipartite graph
