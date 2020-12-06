@@ -2,9 +2,9 @@
 ## Find a maximum matching in a bipartite graph
 
 ## Requirements
-Running ```matchings.cxx``` requires C++11.
+Running ```matching.cxx``` requires g++.
 
-Run ```pip3 install -r requirements.txt``` to install ```visualize.py``` requirements.
+To create a graphic using ```run.sh```, [PyGraphviz](https://pygraphviz.github.io/) must be installed. This can be accomplished with ```pip install -r requirements.txt```
 
 ## Usage
 ### Input Graph File
@@ -27,11 +27,11 @@ Runs ```matchings.cxx``` executable with the given argument, then runs ```visual
 ### algo_3.2.1.cxx
 Implements Algorithm 3.2.1 from the textbook.
 
-### matchings.cxx
+### matching.cxx
 Uses Algorithm 3.2.1 to find M-augmenting paths in a biparite graph, starting with an empty matching M. For each M-augmenting path found, it flips the matching edges on the path in order to make it not an M-augmenting path. This step repeats until no more M-augmenting paths are found. M is then written to the standard output and to ```matching.txt```.
 
 ### visualize.py
-Reads graph edges and nodes from ```graph_data.txt``` and matching edges from ```matching.txt```. It then saves an image of the graph with colored matching to ```matching_image.png```.
+Reads graph edges and nodes from ```graph_data.txt``` and matching edges from ```matching.txt```. It then saves an image of the graph with colored matching to ```matching.png```.
 
 ### knm.cxx
 Produces input data for the complete bipartite graph with partite sets of size n and m. The data is written to the standard output. To use, redirect two integers into the executable.
