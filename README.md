@@ -4,7 +4,7 @@
 ## Requirements
 Running ```matching.cxx``` requires g++.
 
-To create a graphic using ```run.sh```, [PyGraphviz](https://pygraphviz.github.io/) must be installed. This can be accomplished with ```pip install -r requirements.txt```
+To create a graphic using ```run.sh```, [PyGraphviz](https://pygraphviz.github.io/) and Python3.7 must be installed. This can be accomplished with ```pip install -r requirements.txt```
 
 ## Usage
 ### Input Graph File
