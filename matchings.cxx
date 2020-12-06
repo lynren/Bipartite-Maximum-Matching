@@ -153,7 +153,7 @@ int main(){
         cout << "Maximum matching found: \n{";
         for(auto v = M.begin(); v != M.end(); ++v){
                 cout << '(' << idXi[v->first] << ", " << idYi[v->second] << ')';
-                if(distance(v, M.end()) > 1) cout << ", ";
+                if(next(v) != M.end()) cout << ", ";
                 outf << idXi[v->first] << ' ' << idYi[v->second] << '\n';
         }
         outf.close();

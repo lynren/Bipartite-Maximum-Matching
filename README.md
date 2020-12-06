@@ -29,7 +29,7 @@ Implements Algorithm 3.2.1 from the textbook.
 Uses Algorithm 3.2.1 to find M-augmenting paths in a biparite graph, starting with an empty matching M. For each M-augmenting path found, it flips the matching edges on the path in order to make it not an M-augmenting path. This step repeats until no more M-augmenting paths are found. M is then written to the standard output and to ```matching.txt```.
 
 ### visualize.py
-Reads graph edges and nodes from ```graph_data.txt``` and matching edges from ```matching.txt```. It then displays the graph with the edges in the matching colored in red, and nodes belonging to different partite sets colored differently.
+Reads graph edges and nodes from ```graph_data.txt``` and matching edges from ```matching.txt```. It then saves an image of the graph with colored matching to ```matching_image.png```.
 
 ### knm.cxx
 Produces input data for the complete bipartite graph with partite sets of size n and m. The data is written to the standard output. To use, redirect two integers into the executable.

@@ -53,4 +53,5 @@ nx.draw_networkx_nodes(G, pos=pos, nodelist=list(Y), node_color="lightblue")
 nx.draw_networkx_edges(G, pos=pos, edge_color=edge_colors)
 nx.draw_networkx_labels(G, pos=pos, font_color="black", labels=labels)
 
+plt.savefig("matching_image.png")
 plt.show()
