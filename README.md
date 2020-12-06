@@ -35,7 +35,7 @@ matching.png:
 Runs ```matchings.cxx``` executable with the given argument, then runs ```visualize.py``` to produce the image (visuals do not work very well for disconnected graphs).
 
 ### algo_3.2.1.cxx
-Implements Algorithm 3.2.1 from the textbook.
+Implements Algorithm 3.2.1 from the [textbook](https://faculty.math.illinois.edu/~west/igt/).
 
 ### matching.cxx
 Uses Algorithm 3.2.1 to find M-augmenting paths in a biparite graph, starting with an empty matching M. For each M-augmenting path found, it flips the matching edges on the path in order to make it not an M-augmenting path. This step repeats until no more M-augmenting paths are found. M is then written to the standard output and to ```matching.txt```.
