@@ -1,6 +1,4 @@
-import networkx as nx
-import matplotlib.pyplot as plt
-
+import pygraphviz as pgv
 
 f = open("graph_data.txt", "r")
 m = open("matching.txt", "r")
@@ -32,26 +30,24 @@ for line in m:
     c = line.split(" ")
     matching.add((c[0], c[1].rstrip()))
 
-G = nx.Graph()
+G = pgv.AGraph()
 # add nodes to G
 for x in X:
-    G.add_node(x)
+    G.add_node(x, color="lightgreen")
+
 for y in Y:
-    G.add_node(y)
+    G.add_node(y, color="lightblue")
+
 # add edges to G
 for x, y in edges.difference(matching):
     G.add_edge(x, y, color="black")
 for x, y in matching:
     G.add_edge(x, y, color="red")
 
-edge_colors = nx.get_edge_attributes(G, 'color').values()
+G.node_attr['style'] = 'filled'
+G.node_attr['shape'] = 'circle'
+G.layout()
+G.draw("matching.png")
 
-pos = nx.kamada_kawai_layout(G)
 
-nx.draw_networkx_nodes(G, pos=pos, nodelist=list(X), node_color="lightgreen")
-nx.draw_networkx_nodes(G, pos=pos, nodelist=list(Y), node_color="lightblue")
-nx.draw_networkx_edges(G, pos=pos, edge_color=edge_colors)
-nx.draw_networkx_labels(G, pos=pos, font_color="black", labels=labels)
-
-plt.savefig("matching_image.png")
-plt.show()
+# pos = nx.kamada_kawai_layout(G)
