@@ -136,9 +136,10 @@ int main(){
                                 // add edge from current vertex to next to M
                                 Mi.erase(v2);
                                 M.erase(v1);
-                                if(G.getAdjMat()[v1][v2] == 0) continue;
-                                M[v1] = v2;
-                                Mi[v2] = v1;
+                                if(G.getAdjMat()[v1][v2] == 1){
+                                        M[v1] = v2;
+                                        Mi[v2] = v1;
+                                }
                         }
                 }
         }while(aug); // iterate while an M-augmenting path exists in G
