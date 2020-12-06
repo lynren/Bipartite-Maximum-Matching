@@ -10,6 +10,8 @@
  *   represented as two vertices separated by a space.
  */
 
+//=============================================================================
+
 #include "Bigraph.cxx"
 #include <iostream>
 #include <vector>
@@ -19,13 +21,14 @@
 #include <string>
 #include <fstream>
 
+//=============================================================================
+
 using namespace std;
 
 int main(){
         ofstream outf;
-        outf.open("matching.txt", ios::binary | ios::out);
-        vector<int> X, Y;
-        vector<pair<int, int>> edges;
+        outf.open("matching.txt", ios::binary | ios::out); // write matching here
+        Bigraph G; // Bigraph object storing our graph
         // M is a mapping from vertices in X to vertices in Y, representing
         // a matching. Mi is the inverse of M.
         unordered_map<int, int> M, Mi;
@@ -40,9 +43,8 @@ int main(){
         getline(cin, line);
         stringstream in(line);
         while(in >> vertex){
-                idX[vertex] = idX.size();
-                idXi[idX.size()-1] = vertex;
-                X.push_back(idX[vertex]);
+                tie(idX[vertex], idXi[idX.size()]) = make_tuple(idX.size(), vertex);
+                G.addX(idX[vertex]);
         }
         in.clear();
 
@@ -50,29 +52,23 @@ int main(){
         getline(cin, line);
         in.str(line);
         while(in >> vertex){
-                idY[vertex] = idY.size();
-                idYi[idY.size()-1] = vertex;
-                Y.push_back(idY[vertex]);
+                tie(idY[vertex], idYi[idY.size()]) = make_tuple(idY.size(), vertex);
+                G.addY(idX[vertex]);
         }
 
         // populate edge set
-        while(cin >> vertex >> vertex2){
-                edges.push_back({idX[vertex], idY[vertex2]});
-        }
-
-        // Create Graph object G, the X,Y-bigraph
-        Bigraph G(X, Y, edges);
+        while(cin >> vertex >> vertex2) G.addEdge(idX[vertex], idY[vertex2]);
 
         // U = set of vertices in X unsaturated by M
         // Initially M = {} => U = X
-        set<int>U(X.begin(), X.end()), T, S;
+        set<int>U(G.getX().begin(), G.getX().end()), T, S;
 
         // augmenting path flag. set to true if an augmenting path is found
         bool aug;
 
         do{
                 aug = false; // intially, we have found no augmenting path
-                vector<string> aug_path; // store the path being traversed
+                vector<int> aug_path; // store the path being traversed
 
                 // Algorithm 3.2.1
                 // Find an M-augmenting path
@@ -85,20 +81,26 @@ int main(){
                 // Repeat iteration while S has unmarked vertices
                 while(unmarked.size() > 0){
                         int x = *unmarked.begin(); // pick an unmarked vertex x
-                        aug_path.push_back(idXi[x]); // append x to the path
+                        aug_path.push_back(x); // append x to the path
 
                         // for each neighbor y of x
                         for(int y : G.getNeighbors(x)){
                                 // if edge xy is not in M
                                 if((M.find(x) == M.end() || M[x] != y)){
-                                        if(aug_path.size() % 2 == 0)aug_path.pop_back();
-                                        aug_path.push_back(idYi[y]);
+                                        // Since we start at a vertex in X,
+                                        // current path must be of odd length before
+                                        // visiting a vertex in Y
+                                        // if prev vertex on path is in Y, pop it
+                                        if(aug_path.size() % 2 == 0) aug_path.pop_back();
+                                        aug_path.push_back(y); // append the vertex to path
                                         // if y is saturated by M
                                         if(Mi.find(y) != Mi.end()){
                                                 // include y in T (reached from x)
                                                 T.insert(x);
                                                 // include w in S (reached from y)
                                                 S.insert(Mi[y]);
+                                                // check if y has previously been marked
+                                                // if not, add it to the unmarked set
                                                 if(marked.find(Mi[y]) == marked.end())
                                                         unmarked.insert(Mi[y]);
                                         }
@@ -119,10 +121,10 @@ int main(){
 
                 if(aug){// if an augmenting path has been found
                         // flip augmented path edges in M
-                        int v1 = idX[aug_path[0]], v2 = idY[aug_path[1]];
+                        int v1 = aug_path[0], v2 = aug_path[1];
                         M[v1] = v2; Mi.erase(v2); Mi[v2] = v1; U.erase(v1);
                         for(size_t i = 2; i < aug_path.size(); i+=2){
-                                v1 = idX[aug_path[i]], v2 = idY[aug_path[i+1]];
+                                v1 = aug_path[i], v2 = aug_path[i+1];
 
                                 // remove edge in M from current to prev vertex in path
                                 // add edge from current vertex to next to M
@@ -133,6 +135,7 @@ int main(){
                 }
         }while(aug); // iterate while an M-augmenting path exists in G
 
+        // output the matching & write matching file
         cout << "Maximum matching found: \n{";
         for(auto v = M.begin(); v != M.end(); ++v){
                 cout << '(' << idXi[v->first] << ", " << idYi[v->second] << ')';
