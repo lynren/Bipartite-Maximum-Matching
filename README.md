@@ -19,6 +19,16 @@ Use ```./run.sh <input_file>``` where ```<input_file>``` has the structure descr
 
 To produce a matching without visuals, compile ```matchings.cxx``` and run with an input file redirected into the executable.
 
+## Example
+```
+./run.sh examples/ocotopus
+Maximum matching found:
+{(x11, y7), (x10, y6), (x9, y5), (x8, y4), (x7, y11), (x6, y10), (x5, y9), (x4, y8), (x3, y3), (x2, y2), (x1, y1), (x0, y0)}
+```
+matching.png:
+
+![ocotopus matching](https://i.imgur.com/XH6rQf5.png)
+
 ## Files
 
 ### run.sh
