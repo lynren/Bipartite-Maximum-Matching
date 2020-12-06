@@ -122,13 +122,21 @@ int main(){
                 if(aug){// if an augmenting path has been found
                         // flip augmented path edges in M
                         int v1 = aug_path[0], v2 = aug_path[1];
-                        M[v1] = v2; Mi.erase(v2); Mi[v2] = v1; U.erase(v1);
+                        Mi.erase(v2);
+                        M.erase(v1);
+                        if(G.getAdjMat()[v1][v2] == 1){
+                                M[v1] = v2;
+                                Mi[v2] = v1;
+                                U.erase(v1);
+                        }
                         for(size_t i = 2; i < aug_path.size(); i+=2){
                                 v1 = aug_path[i], v2 = aug_path[i+1];
 
                                 // remove edge in M from current to prev vertex in path
                                 // add edge from current vertex to next to M
                                 Mi.erase(v2);
+                                M.erase(v1);
+                                if(G.getAdjMat()[v1][v2] == 0) continue;
                                 M[v1] = v2;
                                 Mi[v2] = v1;
                         }
