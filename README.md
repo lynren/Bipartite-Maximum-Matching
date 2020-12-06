@@ -2,7 +2,7 @@
 ## Find a maximum matching in a bipartite graph
 
 ## Requirements
-Running ```matching.cxx``` requires g++.
+All C++ files are written with C++11.
 
 To create a graphic using ```run.sh```, [PyGraphviz](https://pygraphviz.github.io/) and Python3.7 must be installed. This can be accomplished with ```pip install -r requirements.txt```
 
