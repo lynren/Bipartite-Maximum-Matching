@@ -1,5 +1,6 @@
 #!/bin/bash
 cp $1 graph_data.txt
 echo  >> graph_data.txt
-./a.out < $1
+make all
+./matcher < $1
 python visualize.py
