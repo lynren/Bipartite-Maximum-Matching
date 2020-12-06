@@ -19,6 +19,8 @@ Use ```./run.sh <input_file>``` where ```<input_file>``` has the structure descr
 
 To produce a matching without visuals, compile ```matchings.cxx``` and run with an input file redirected into the executable.
 
+## Files
+
 ### run.sh
 Runs ```matchings.cxx``` executable with the given argument, then runs ```visualize.py``` to produce the image (visuals do not work very well for disconnected graphs).
 
