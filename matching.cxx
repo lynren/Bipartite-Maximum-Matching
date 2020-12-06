@@ -20,7 +20,6 @@
 #include <fstream>
 
 using namespace std;
-#define DEBUG 0
 
 int main(){
         ofstream outf;
@@ -59,7 +58,6 @@ int main(){
         // populate edge set
         while(cin >> vertex >> vertex2){
                 edges.push_back({idX[vertex], idY[vertex2]});
-                in.clear();
         }
 
         // Create Graph object G, the X,Y-bigraph
@@ -88,7 +86,6 @@ int main(){
                 while(unmarked.size() > 0){
                         int x = *unmarked.begin(); // pick an unmarked vertex x
                         aug_path.push_back(idXi[x]); // append x to the path
-                        if(DEBUG)cerr<<"unmarked vertex picked: "<<x<<'\n';
 
                         // for each neighbor y of x
                         for(int y : G.getNeighbors(x)){
@@ -120,35 +117,21 @@ int main(){
                 }
                 // end Algorithm 3.2.1
 
-                if(DEBUG){
-                        cerr << "Augmenting path: ";
-                        for(auto s : aug_path){
-                                cerr << s << ' ';
-                        }
-                        cerr << '\n';
-                }
-
                 if(aug){// if an augmenting path has been found
                         // flip augmented path edges in M
                         int v1 = idX[aug_path[0]], v2 = idY[aug_path[1]];
-                        if(DEBUG)cerr<<"removing edge "<<Mi[v2]<<' '<<v2<<"\n";
-                        if(DEBUG)cerr<<"adding edge "<<v1<<' '<<v2<<" to M\n";
                         M[v1] = v2; Mi.erase(v2); Mi[v2] = v1; U.erase(v1);
                         for(size_t i = 2; i < aug_path.size(); i+=2){
                                 v1 = idX[aug_path[i]], v2 = idY[aug_path[i+1]];
 
                                 // remove edge in M from current to prev vertex in path
                                 // add edge from current vertex to next to M
-                                if(DEBUG)cerr<<"removing edge "<<Mi[v2]<<' '<<v2<<"\n";
                                 Mi.erase(v2);
-                                if(DEBUG)cerr<<"adding edge "<<v1<<' '<<v2<<" to M\n";
                                 M[v1] = v2;
                                 Mi[v2] = v1;
                         }
                 }
-
-
-        }while(aug);
+        }while(aug); // iterate while an M-augmenting path exists in G
 
         cout << "Maximum matching found: \n{";
         for(auto v = M.begin(); v != M.end(); ++v){
