@@ -33,7 +33,7 @@ int main(){
         // a matching. Mi is the inverse of M.
         unordered_map<int, int> M, Mi;
         // idX, idY map the string representation of vertices to a number from 0
-        // to |X| and 0 to |Y| respectively.
+        // to |X| and 0 to |Y| respectively. idXi, idYi are the inverse.
         unordered_map<string, int> idX, idY;
         unordered_map<int, string> idYi, idXi;
 
